@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="report_config_form_view">
+            <field name="name">report_config.form_view</field>
+            <field name="model">report.config</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report configuration">
+                    <field name="name" />
+                    <notebook colspan="4">
+                         <page string="Generation">
+		                    <field name="type_of_format" />
+		                    <field name="param_ids" nolabel="1" colspan="4"  attrs="{'invisible':[('parameters_enabled', '=', False)]}"/>
+		                    <button name="generate_report" string="Export file" icon="terp-report" type="object"/>
+		                    <field name="message" colspan="2" nolabel="1"/>
+		                    <separator string="Reports" colspan="4"/>
+		                    <field name="report_version_ids" nolabel="1" colspan="4"/>
+                         </page>
+                         <page groups="report_spreadsheet.group_report_spreadsheet_admin" string="Configuration">
+	                        <separator string="Users allowed" colspan="4"/>
+	                        <field name="parameters_enabled" />
+	                        <field name="active" />
+	                        <field name="user_ids" nolabel="1" colspan="2"/>
+	                        <newline/>
+	                        <separator string="Columns Header" colspan="4"/>
+	                        <field name="columns_header" nolabel="1" colspan="4"/>
+	                        <newline/>
+	                        <separator string="Code" colspan="4"/>
+	                        <field name="code" nolabel="1" colspan="4"/>
+                         </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="report_config_tree_view">
+            <field name="name">report_config.tree_view</field>
+            <field name="model">report.config</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Report configuration">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="report_config_search_view" model="ir.ui.view">
+            <field name="name">report_config.search_view</field>
+            <field name="model">report.config</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Report Configuration">
+                    <group>
+                        <field name="name" />
+                        <filter icon="gtk-missing-image" name="inactive" string="Show Inactive" domain="[]" context="{'active_test': False}" separator="1"
+                         groups="report_spreadsheet.group_report_spreadsheet_admin"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_report_config" model="ir.actions.act_window">
+            <field name="res_model">report.config</field>
+            <field name="name">Report Generation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" ref="report_config_tree_view"/>
+            <field name="search_view_id" ref="report_config_search_view"/>
+            <field name="multi">True</field>
+            <field name="target">current</field>
+            <field name="domain">[('compute_domain','=','result')]</field>
+        </record>
+        <!-- Menu use plural form: https://doc.openerp.com/contribute/05_developing_modules/ -->
+        <menuitem name="Reports Generation" id="menu_report_config" parent="base.menu_reporting" action="action_report_config" sequence="7" />
+        
+	    <record model="ir.ui.menu" id="menu_report_config">
+	        <field eval="[(6, 0, [ref('group_report_spreadsheet_admin'), ref('group_report_spreadsheet_user')])]" name="groups_id"/>
+	    </record>
+    </data>
+</openerp>

@@ -1,0 +1,12 @@
+-
+
+  I generate the report
+-
+  !python {model: report.config}: |
+    self.generate_report(cr, uid, ref('test_report'), context)
+-
+
+  I check the report generated
+-
+  !python {model: report.config}: |
+    assert self.browse(cr, uid, ref('test_report'), context).report_version_ids, 'The report was not created'
