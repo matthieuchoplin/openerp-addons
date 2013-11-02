@@ -1,0 +1,4 @@
+openerp-addons
+==============
+
+Openerp addons
