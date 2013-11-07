@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <record model="report.config" id="demo_report">
+            <field name="name">Dummy report (list installed modules)</field>
+            <field name="type_of_format">.csv</field>
+            <field name="columns_header">columns_header = [
+        (_('Module'), 'string'), (_('Author'), 'string')]</field>
+            <field name="code"># Code:
+list_of_lines = []
+module_obj = self.pool.get('ir.module.module')
+module_installed_ids = module_obj.search(cr, uid, [('state', '=', 'installed')], context=context)
+for line in module_obj.read(cr, uid, module_installed_ids, ['name', 'author'], context):
+    list_of_lines.append([line['name'],line['author']])
+result = list_of_lines</field>
+        </record>
+    </data>
+</openerp>

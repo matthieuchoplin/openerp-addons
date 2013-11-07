@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="report_param_tree_view">
+            <field name="name">report_param.tree_view</field>
+            <field name="model">report.param</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Report parameter" editable="top">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="date" attrs="{'readonly':[('type','!=','date')]}"/>
+                    <field name="number" attrs="{'readonly':[('type','!=','number')]}"/>
+                    <field name="text" attrs="{'readonly':[('type','!=','text')]}"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>
