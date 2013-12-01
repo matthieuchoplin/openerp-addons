@@ -26,6 +26,17 @@
     This module enables to create reports in xls or csv format using Python.
     Suggestions & Feedback to: choplin.mat@gmail.com
     This version is adapted for the last version of OpenERP (v7 and trunk)
+
+They are 2 levels of security for this module:
+- first: the 2 user groups: one for the configuration of the report (Admin), and one for the execution of the report (User)
+- second: the access to the report is enabled per user. It means that 2 different users can each have their own report without that the other users view their report
+
+To sum up:
+- possibility to use python code to generate the report without installing new module or restarting the server
+- possibility to use parameters
+- possibility to personalise the access to the report: the report will be displayed only for the authorized users
+- versioning of the reports in the ir_attachment objects
+- file format: .xls or .csv
     """,
     "author": "Made.com",
     "license": 'AGPL-3',
